@@ -4,6 +4,7 @@ const morgan = require('morgan')
 
 
 app.use(express.json())
+app.use(express.static('build'))
 
 let persons = [
   {
@@ -29,6 +30,25 @@ let persons = [
     }
   
 ]
+
+app.use(
+  morgan(function (tokens, req, res) {
+    if (req.method === 'POST') {
+      return [
+        tokens.method(req, res),
+        tokens.url(req, res),
+        tokens.status(req, res),
+        tokens.res(req, res, 'content-length'),
+        '-',
+        tokens['response-time'](req, res),
+        'ms',
+      ].join(' ')
+    }
+  })
+)
+
+
+
 
 app.get('/api/persons', (request, response) => {
   const id = Number(request.params.id)
