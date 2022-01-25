@@ -13,7 +13,7 @@ const UserInfo = ({ user, setUser, setMessage }) => {
   return (
     <>
       <p>
-        {user.name} logged in <button onClick={handleLogout}>Logout</button>
+        {user.name} logged in <button id="logout" onClick={handleLogout}>Logout</button>
       </p>
     </>
   )
@@ -55,7 +55,7 @@ const BlogsInfo = ({
     <>
       <h2>blogs</h2>
       <div style={hideWhenVisible}>
-        <button onClick={() => setBlogVisible(true)}>create new Blog</button>
+        <button id='create new blog' onClick={() => setBlogVisible(true)}>create new Blog</button>
       </div>
       <div style={showWhenVisible}>
         <BlogForm
@@ -71,7 +71,7 @@ const BlogsInfo = ({
           setBlogVisible={setBlogVisible}
         />
 
-        <button onClick={() => setBlogVisible(false)}>cancel</button>
+        <button id="cancel" onClick={() => setBlogVisible(false)}>cancel</button>
       </div>
 
       <UserInfo user={user} setUser={setUser} setMessage={setMessage} />
