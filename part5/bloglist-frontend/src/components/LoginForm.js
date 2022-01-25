@@ -1,5 +1,6 @@
-import React from "react";
-import loginService from "../services/login";
+import React from 'react'
+import loginService from '../services/login'
+import PropTypes from 'prop-types'
 
 const LoginForm = ({
   username,
@@ -10,24 +11,24 @@ const LoginForm = ({
   setMessage,
 }) => {
   const handleLogin = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
     try {
       const user = await loginService.login({
         username,
         password,
-      });
-      window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
-      setUser(user);
-      setUsername("");
-      setPassword("");
+      })
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
+      setUser(user)
+      setUsername('')
+      setPassword('')
     } catch (exception) {
-      setMessage("Wrong credentials");
+      setMessage('Wrong credentials')
       setTimeout(() => {
-        setMessage(null);
-      }, 5000);
+        setMessage(null)
+      }, 5000)
     }
-  };
+  }
 
   return (
     <div>
@@ -50,7 +51,15 @@ const LoginForm = ({
         <button type="submit">login</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export { LoginForm };
+LoginForm.propTypes = {
+  username: PropTypes.func.isRequired,
+  setUsername: PropTypes.func.isRequired,
+  password: PropTypes.func.isRequired,
+  setPassword: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
+}
+
+export { LoginForm }
