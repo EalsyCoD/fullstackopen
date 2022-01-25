@@ -1,90 +1,23 @@
-import React from "react";
-import blogService from "../services/blogs";
+import React from 'react'
+import blogService from '../services/blogs'
 
-import { Blog } from "./Blog";
-
-const BlogsForm = ({
-  blogs,
-  setBlogs,
-  title,
-  setTitle,
-  author,
-  setAuthor,
-  url,
-  setUrl,
-  setMessage,
-  setBlogVisible,
-}) => {
-  const handleAddBlog = async (event) => {
-    event.preventDefault();
-    try {
-      const response = await blogService.create({
-        title,
-        author,
-        url,
-      });
-      setBlogs(blogs.concat(response));
-      setBlogVisible(false);
-      setTitle("");
-      setAuthor("");
-      setUrl("");
-      setMessage("new blog added");
-    } catch (exception) {
-      setMessage("new blog not added");
-    }
-  };
-
-  return (
-    <>
-      <form onSubmit={handleAddBlog}>
-        <div>
-          Title
-          <input
-            type="text"
-            value={title}
-            name="Title"
-            onChange={({ target }) => setTitle(target.value)}
-          />
-        </div>
-        <div>
-          Author
-          <input
-            type="text"
-            value={author}
-            name="Author"
-            onChange={({ target }) => setAuthor(target.value)}
-          />
-        </div>
-        <div>
-          Url
-          <input
-            type="text"
-            value={url}
-            name="Url"
-            onChange={({ target }) => setUrl(target.value)}
-          />
-        </div>
-
-        <button type="submit">create</button>
-      </form>
-    </>
-  );
-};
+import { Blog } from './Blog'
+import { BlogForm } from './BlogForm'
 
 const UserInfo = ({ user, setUser, setMessage }) => {
   const handleLogout = async () => {
-    window.localStorage.removeItem("loggedBlogappUser");
-    setMessage("Logout success");
-    setUser(null);
-  };
+    window.localStorage.removeItem('loggedBlogappUser')
+    setMessage('Logout success')
+    setUser(null)
+  }
   return (
     <>
       <p>
         {user.name} logged in <button onClick={handleLogout}>Logout</button>
       </p>
     </>
-  );
-};
+  )
+}
 
 const BlogsInfo = ({
   blogs,
@@ -101,22 +34,22 @@ const BlogsInfo = ({
   BlogVisible,
   setBlogVisible,
 }) => {
-  const hideWhenVisible = { display: BlogVisible ? "none" : "" };
-  const showWhenVisible = { display: BlogVisible ? "" : "none" };
+  const hideWhenVisible = { display: BlogVisible ? 'none' : '' }
+  const showWhenVisible = { display: BlogVisible ? '' : 'none' }
 
   const removeBlog = async (blogDelete) => {
     try {
-      if (window.confirm("Delete", blogDelete.title, "?")) {
-        blogService.remove(blogDelete.id);
-        setMessage("Blog", blogDelete.title, "deleted");
-        setBlogs(blogs.filter((blog) => blog.id !== blogDelete.id));
-        setMessage(null);
+      if (window.confirm('Delete', blogDelete.title, '?')) {
+        blogService.remove(blogDelete.id)
+        setMessage('Blog', blogDelete.title, 'deleted')
+        setBlogs(blogs.filter((blog) => blog.id !== blogDelete.id))
+        setMessage(null)
       }
     } catch (exception) {
-      setMessage("Cannot delete blog", blogDelete.title);
-      setMessage(null);
+      setMessage('Cannot delete blog', blogDelete.title)
+      setMessage(null)
     }
-  };
+  }
 
   return (
     <>
@@ -125,7 +58,7 @@ const BlogsInfo = ({
         <button onClick={() => setBlogVisible(true)}>create new Blog</button>
       </div>
       <div style={showWhenVisible}>
-        <BlogsForm
+        <BlogForm
           blogs={blogs}
           setBlogs={setBlogs}
           title={title}
@@ -146,7 +79,7 @@ const BlogsInfo = ({
         <Blog key={blog.id} blog={blog} removeBlog={removeBlog} />
       ))}
     </>
-  );
-};
+  )
+}
 
-export { BlogsInfo };
+export { BlogsInfo }

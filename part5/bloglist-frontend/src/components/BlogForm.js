@@ -1,32 +1,73 @@
-import React, { useState } from "react";
+import React from 'react'
+import blogService from '../services/blogs'
 
-const BlogForm = ({ createBlog }) => {
-  const [newBlog, setNewBlog] = useState("");
-
-  const handleChange = (event) => {
-    setNewBlog(event.target.value);
-  };
-
-  const addBlog = (event) => {
-    event.preventDefault();
-    createBlog({
-      content: newBlog,
-      important: Math.random() > 0.5,
-    });
-
-    setNewBlog("");
-  };
+const BlogForm = ({
+  blogs,
+  setBlogs,
+  title,
+  setTitle,
+  author,
+  setAuthor,
+  url,
+  setUrl,
+  setMessage,
+  setBlogVisible,
+}) => {
+  const handleAddBlog = async (event) => {
+    event.preventDefault()
+    try {
+      const response = await blogService.create({
+        title,
+        author,
+        url,
+      })
+      setBlogs(blogs.concat(response))
+      setBlogVisible(false)
+      setTitle('')
+      setAuthor('')
+      setUrl('')
+      setMessage('new blog added')
+    } catch (exception) {
+      setMessage('new blog not added')
+    }
+  }
 
   return (
-    <div>
-      <h2>Create a new blog</h2>
+    <>
+      <form onSubmit={handleAddBlog}>
+        <div>
+          Title
+          <input
+            type="text"
+            value={title}
+            name="Title"
+            onChange={({ target }) => setTitle(target.value)}
+          />
+        </div>
+        <div>
+          Author
+          <input
+            type="text"
+            value={author}
+            name="Author"
+            onChange={({ target }) => setAuthor(target.value)}
+          />
+        </div>
+        <div>
+          Url
+          <input
+            type="text"
+            value={url}
+            name="Url"
+            onChange={({ target }) => setUrl(target.value)}
+          />
+        </div>
 
-      <form onSubmit={addBlog}>
-        <input value={newBlog} onChange={handleChange} />
-        <button type="submit">save</button>
+        <button type="submit">create</button>
       </form>
-    </div>
-  );
-};
+    </>
+  )
+}
 
-export default BlogForm;
+
+export { BlogForm }

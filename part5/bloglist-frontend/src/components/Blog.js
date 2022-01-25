@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import blogService from "../services/blogs";
+import React, { useState } from 'react'
+import blogService from '../services/blogs'
 
 const blogStyle = {
   paddingTop: 5,
   paddingLeft: 2,
-  border: "solid",
+  border: 'solid',
   borderWidth: 1,
   marginBottom: 5,
-};
+}
 const blogUlStyle = {
   margin: 0,
   padding: 0,
-};
+}
 
 const Blog = (props) => {
-  const blog = props.blog;
-  const [blogObject, setBlogObject] = useState(blog);
-  const [BlogTextVisible, setBlogTextVisible] = useState(false);
+  const blog = props.blog
+  const [blogObject, setBlogObject] = useState(blog)
+  const [BlogTextVisible, setBlogTextVisible] = useState(false)
 
-  const hideWhenVisible = { display: BlogTextVisible ? "none" : "" };
-  const showWhenVisible = { display: BlogTextVisible ? "" : "none" };
+  const hideWhenVisible = { display: BlogTextVisible ? 'none' : '' }
+  const showWhenVisible = { display: BlogTextVisible ? '' : 'none' }
 
   const likeUp = async () => {
     const updateBlog = {
@@ -28,20 +28,20 @@ const Blog = (props) => {
       author: blog.author,
       url: blog.url,
       likes: blog.likes + 1,
-    };
-    await blogService.update(updateBlog);
-    setBlogObject(updateBlog);
-  };
+    }
+    await blogService.update(updateBlog)
+    setBlogObject(updateBlog)
+  }
 
-  const remBlog = () => props.removeBlog(blog);
+  const remBlog = () => props.removeBlog(blog)
 
   return (
     <div style={blogStyle}>
       <div style={hideWhenVisible}>
-        {blog.title} {blog.author}
+        {blog.title} - {blog.author}
         <button
           onClick={() => {
-            setBlogTextVisible(true);
+            setBlogTextVisible(true)
           }}
         >
           view
@@ -51,10 +51,10 @@ const Blog = (props) => {
       <div style={showWhenVisible}>
         <ul style={blogUlStyle}>
           <li>
-            {blog.title}{" "}
+            {blog.title}{' '}
             <button
               onClick={() => {
-                setBlogTextVisible(false);
+                setBlogTextVisible(false)
               }}
             >
               hide
@@ -62,10 +62,10 @@ const Blog = (props) => {
           </li>
           <li>{blog.url}</li>
           <li>
-            {blogObject.likes}{" "}
+            {blogObject.likes}{' '}
             <button
               onClick={() => {
-                likeUp();
+                likeUp()
               }}
             >
               like
@@ -75,14 +75,14 @@ const Blog = (props) => {
         </ul>
         <button
           onClick={() => {
-            remBlog(blog);
+            remBlog(blog)
           }}
         >
           remove
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { Blog };
+export { Blog }
