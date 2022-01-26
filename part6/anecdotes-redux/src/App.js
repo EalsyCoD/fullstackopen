@@ -13,8 +13,9 @@ import { initAnecdotes } from './reducers/anecdoteReducer'
 
 const App = () => {
   const dispatch = useDispatch()
+
   useEffect(() => {
-      getAll().then(anecdotes => dispatch(initAnecdotes(anecdotes)))
+      dispatch(initAnecdotes())
   }, [dispatch])
   return (
     <div>
