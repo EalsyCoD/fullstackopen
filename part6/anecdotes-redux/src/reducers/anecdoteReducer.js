@@ -4,11 +4,11 @@ const anecdoteReducer = (state = [], action) => {
   console.log('state now: ', state)
   console.log('action', action)
 
-   switch (action.type) {
-   case 'NEW_ANECDOTE':
+  switch (action.type) {
+    case 'INIT_ANECDOTES':
+      return action.data
+    case 'NEW_ANECDOTE':
       return [...state, action.data]
-      case 'INIT_ANECDOTE':
-        return action.data
     case 'VOTE': {
       return state.map((anecdote) =>
         anecdote.id === action.data
@@ -19,6 +19,7 @@ const anecdoteReducer = (state = [], action) => {
     default:
       return state
   }
+
   return state
 }
 
