@@ -69,7 +69,7 @@ const App = () => {
         <Route path="/about">
           <About />
         </Route>
-        <Route path="/create_new">
+        <Route path="/create">
           <CreateNew addNew={addNew} />
         </Route>
         <Route path="/">
