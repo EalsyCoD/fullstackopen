@@ -1,15 +1,18 @@
 import express from 'express';
-import patientService from '../services/patientService';
-
 const router = express.Router();
 
+import patients from '../services/patientService';
+import { toPatientEntry } from '../utils/utils';
 
 router.get('/', (_req, res) =>{
-  res.send(patientService.getNonSensitive());
+  res.send(patients.getNonSensitive());
 });
 
-router.post('/', (_req, res) => {
-  res.send('Saving a patient!');
+router.post('/', (req, res) => {
+  const data = toPatientEntry(req.body);
+  const newEntry = patients.addEntry(data);
+
+  res.json(newEntry);
 });
 
 export default router;

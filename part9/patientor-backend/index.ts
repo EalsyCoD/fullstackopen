@@ -2,7 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import diaryRouter from './src/routes/diares';
+// import diaryRouter from './src/routes/diares';
 import diagnosRouter from './src/routes/diagnose';
 import patientRouter from './src/routes/patients';
 
@@ -16,7 +16,7 @@ app.get('/ping', (_req, res) => {
   res.send('pong');
 });
 
-app.use('/api/diaries', diaryRouter);
+// app.use('/api/diaries', diaryRouter);
 app.use ('/api/diagnoses', diagnosRouter);
 app.use ('/api/patients', patientRouter);
 
