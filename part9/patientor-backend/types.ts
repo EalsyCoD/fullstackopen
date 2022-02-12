@@ -1,10 +1,6 @@
-// export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 
-export type NonSensitivePatient = Omit<Patient, 'ssn'>;
-
-export type NonSensitiveDiagnose = Omit<Diagnose, 'latin'>;
-
-// export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >;
 
 export enum Gender {
   male = 'male',
@@ -12,28 +8,8 @@ export enum Gender {
   other = 'other',
 }
 
-export enum Weather {
-    Sunny = 'sunny',
-    Rainy = 'rainy',
-    Cloudy = 'cloudy',
-    Stormy = 'stormy',
-    Windy = 'windy',
-  }
-  
-  export enum Visibility {
-    Great = 'great',
-    Good = 'good',
-    Ok = 'ok',
-    Poor = 'poor',
-  }
+export interface Entry {}
 
-// export interface DiaryEntry {
-//     id: number;
-//     date: string;
-//     weather: Weather;
-//     visibility: Visibility;
-//     comment?: string;
-// }
 
 export interface Patient {
     id: string;
@@ -42,6 +18,7 @@ export interface Patient {
     ssn?: string;
     gender: Gender;
     occupation: string;
+    entries: Entry[];
 }
 
 export interface Diagnose {

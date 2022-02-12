@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Patient, Gender } from '../../types';
+import { Patient, Gender } from '../../types'
 
 const parseString = (text: any): string => {
   if (!text || !isString(text)) {
@@ -44,6 +44,7 @@ const toPatientEntry = (object: any): Omit<Patient, 'id'> => {
     ssn: parseString(object.ssn),
     gender: parseGender(object.gender),
     occupation: parseString(object.occupation),
+    entries: [],
   };
 };
 

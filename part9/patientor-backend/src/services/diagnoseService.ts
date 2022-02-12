@@ -1,31 +1,16 @@
 import diagnoseData from '../data/diagnoses.json';
 
+import { Diagnose } from '../../types';
 
 
-import { Diagnose, NonSensitiveDiagnose } from '../../types';
-
-
-const diagnoses: Array<Diagnose> = diagnoseData as Array<Diagnose>;
+const diagnose: Array<Diagnose> = diagnoseData;
 
 
 const getEntries = (): Array<Diagnose> => {
-  return diagnoses;
+  return diagnose;
 };
 
-const getNonSensitive = (): NonSensitiveDiagnose[] => {
-  return diagnoses.map(({code, name, latin}) =>({
-    code,
-    name,
-    latin,
-  }));
-};
-
-const add = () => {
-  return null;
-};
 
 export default {
   getEntries,
-  add,
-  getNonSensitive
 };
