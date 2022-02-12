@@ -1,28 +1,44 @@
-import React from 'react';
+import React from "react";
 
-import Content from './Components/Content'
-import Header from './Components/Header'
-import Total from './Components/Total'
+import Content from "./Components/Content";
+import Header from "./Components/Header";
+import Total from "./Components/Total";
+
+import { CoursePart } from "./types";
 
 const App = () => {
-  const courseName = 'Half Stack application development'
-  const courseParts = [
+  const courseName = "Half Stack application development";
+  const courseParts: CoursePart[] = [
     {
       id: 1,
-      name: 'Fundamentals',
+      name: "Fundamentals",
       exerciseCount: 10,
+      description: "This is the leisured course part",
+      type: "normal",
     },
     {
       id: 2,
-      name: 'Using props to pass data',
+      name: "Advanced",
       exerciseCount: 7,
+      description: "This is the harded course part",
+      type: "normal",
     },
     {
       id: 3,
-      name: 'Deeper type usage',
-      exerciseCount: 14,
+      name: "Using props to pass data",
+      exerciseCount: 7,
+      groupProjectCount: 3,
+      type: "groupProject",
     },
-  ]
+    {
+      id: 4,
+      name: "Deeper type usage",
+      exerciseCount: 14,
+      description: "Confusing description",
+      exerciseSubmissionLink: "https://fake-exercise-submit.made-up-url.dev",
+      type: "submission",
+    },
+  ];
 
   return (
     <div>
@@ -32,7 +48,7 @@ const App = () => {
       ))}
       <Total courseParts={courseParts} />
     </div>
-  )
-}
+  );
+};
 
 export default App;

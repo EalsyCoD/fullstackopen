@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
 interface ContentElement {
-  name: string
-  exerciseCount: number
+  name: string;
+  exerciseCount: number;
 }
 
 const Content = ({ name, exerciseCount }: ContentElement) => {
@@ -10,7 +10,7 @@ const Content = ({ name, exerciseCount }: ContentElement) => {
     <p>
       {name} {exerciseCount}
     </p>
-  )
-}
+  );
+};
 
-export default Content
+export default Content;
